@@ -1,3 +1,5 @@
+local piper_tts_buffer
+
 vim.g.nvim_tts = {}
 
 function dump(o)
@@ -25,7 +27,7 @@ local cfg = function ()
     }
 end
 
-function CreateOrToggle()
+piper_tts_buffer.create_or_toggle = function ()
     local current = vim.api.nvim_get_current_buf()
     if vim.g.nvim_tts.id then
         if vim.g.nvim_tts.id == current then
@@ -59,9 +61,8 @@ function CreateOrToggle()
     end
 end
 
-local command = 'piper-tts -m "$HOME/.local/voice/mv2.onnx" -f - -s 11 | aplay'
 
-function setup(config)
+piper_tts_buffer.setup = function (config)
         local nvim_tts = vim.g.nvim_tts
 
         nvim_tts.command = '\\"| piper-tts -m \\"' ..  config.path .. '\\" -f - '
@@ -86,3 +87,5 @@ end
         print("Recived line")
     end,
 }) ]]--
+
+return piper_tts_buffer
