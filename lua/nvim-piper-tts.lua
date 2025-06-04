@@ -1,4 +1,4 @@
-local piper_tts_buffer
+local piper_tts_buffer = {}
 
 vim.g.nvim_tts = {}
 
